@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:hngi8_project0/pages/page.dart';
 import 'package:hngi8_project0/user.dart';
 import 'package:hngi8_project0/widgets/widget1.dart';
 import 'package:hngi8_project0/widgets/widget2.dart';
@@ -42,6 +43,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   onClicked: () async {
                     final image = await ImagePicker()
                         .pickImage(source: ImageSource.gallery);
+
+                    if (image == null) return;
+
+                    final directory = await getApplicationDocumentsDirectory();
+                    final name = image.path;
+                    final imageFile = File('${directory.path}/$name');
+                    final newImage =
+                        await File(image.path).copy(imageFile.path);
+
+                    setState(() => user = user.copy(imagePath: newImage.path));
+                  },
+                ),
+
+                /*onClicked: () async {
+                    final image = await ImagePicker()
+                        .pickImage(source: ImageSource.gallery);
                     if (image == null) return;
                     final directory = await getApplicationDocumentsDirectory();
                     final name = XFile(image.path);
@@ -49,7 +66,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     final newImage = await File(image.path).copy(image.path);
                     setState(() => user = user.copy(imagePath: newImage.path));
                   },
-                ),
+*/
                 const SizedBox(height: 24),
                 TextFieldWidget(
                   label: 'Full Name',
@@ -80,7 +97,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   text: 'Save',
                   onClicked: () {
                     UserPreferences.setUser(user);
-                    Navigator.pushNamed(context, '/1');
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => ProfilePage()));
                   },
                 ),
               ],

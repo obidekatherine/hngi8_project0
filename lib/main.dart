@@ -1,8 +1,7 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hngi8_project0/pages/page.dart';
-import 'package:hngi8_project0/pages/page1.dart';
+import 'package:hngi8_project0/pages/home.dart';
 import 'package:hngi8_project0/theme.dart';
 import 'package:hngi8_project0/userPreference.dart';
 
@@ -32,11 +31,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeProvider.of(context),
           title: title,
-          initialRoute: '/',
-          routes: {
-            '/': (context) => EditProfilePage(),
-            '/1': (context) => ProfilePage(),
-          },
+          home: Home(),
         ),
       ),
     );

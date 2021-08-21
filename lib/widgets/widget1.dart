@@ -11,7 +11,6 @@ AppBar buildAppBar(BuildContext context) {
   final icon = isDarkMode ? CupertinoIcons.sun_max : CupertinoIcons.moon_stars;
 
   return AppBar(
-    leading: BackButton(),
     backgroundColor: Colors.transparent,
     elevation: 0,
     actions: [

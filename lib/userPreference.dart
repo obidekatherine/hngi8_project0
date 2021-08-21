@@ -9,7 +9,8 @@ class UserPreferences {
   static const _keyUser = 'user';
   static const myUser = User(
     imagePath:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNU4SWCNyrQtHiaxxwYCAmAJ_9Ys-wbq7_Lg&usqp=CAU',
+        'https://cdn.pixabay.com/photo/2021/08/18/11/55/coneflowers-6555363__340.jpg',
+    //'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNU4SWCNyrQtHiaxxwYCAmAJ_9Ys-wbq7_Lg&usqp=CAU',
     name: '',
     email: '',
     address: '',

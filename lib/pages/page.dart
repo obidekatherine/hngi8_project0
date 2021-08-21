@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hngi8_project0/pages/page1.dart';
 import 'package:hngi8_project0/user.dart';
 import 'package:hngi8_project0/widgets/widget1.dart';
 import 'package:hngi8_project0/widgets/widget4.dart';
@@ -26,7 +27,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ProfileWidget(
             imagePath: user.imagePath,
             onClicked: () async {
-              await Navigator.pushNamed(context, '/');
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => EditProfilePage()));
               setState(() {});
             },
           ),
