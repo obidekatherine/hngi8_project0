@@ -33,75 +33,86 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: Builder(
           builder: (context) => Scaffold(
             appBar: buildAppBar(context),
-            body: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 32),
-              physics: BouncingScrollPhysics(),
-              children: [
-                ProfileWidget(
-                  imagePath: user.imagePath,
-                  isEdit: true,
-                  onClicked: () async {
-                    final image = await ImagePicker()
-                        .pickImage(source: ImageSource.gallery);
+            body: Scrollbar(
+              hoverThickness: 20,
+              showTrackOnHover: true,
+              isAlwaysShown: true,
+              thickness: 20,
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 32),
+                physics: BouncingScrollPhysics(),
+                children: [
+                  ProfileWidget(
+                    imagePath: user.imagePath,
+                    isEdit: true,
+                    onClicked: () async {
+                      final image = await ImagePicker()
+                          .pickImage(source: ImageSource.gallery);
 
-                    if (image == null) return;
+                      if (image == null) return;
 
-                    final directory = await getApplicationDocumentsDirectory();
-                    final name = image.path;
-                    final imageFile = File('${directory.path}/$name');
-                    final newImage =
-                        await File(image.path).copy(imageFile.path);
+                      final directory =
+                          await getApplicationDocumentsDirectory();
+                      final name = image.path;
+                      final imageFile = File('${directory.path}/$name');
+                      final newImage =
+                          await File(image.path).copy(imageFile.path);
 
-                    setState(() => user = user.copy(imagePath: newImage.path));
-                  },
-                ),
+                      setState(
+                          () => user = user.copy(imagePath: newImage.path));
+                    },
+                  ),
 
-                /*onClicked: () async {
-                    final image = await ImagePicker()
-                        .pickImage(source: ImageSource.gallery);
-                    if (image == null) return;
-                    final directory = await getApplicationDocumentsDirectory();
-                    final name = XFile(image.path);
-                    final imageFile = File('${directory.path}/$name');
-                    final newImage = await File(image.path).copy(image.path);
-                    setState(() => user = user.copy(imagePath: newImage.path));
-                  },
+                  /*onClicked: () async {
+                      final image = await ImagePicker()
+                          .pickImage(source: ImageSource.gallery);
+                      if (image == null) return;
+                      final directory = await getApplicationDocumentsDirectory();
+                      final name = XFile(image.path);
+                      final imageFile = File('${directory.path}/$name');
+                      final newImage = await File(image.path).copy(image.path);
+                      setState(() => user = user.copy(imagePath: newImage.path));
+                    },
 */
-                const SizedBox(height: 24),
-                TextFieldWidget(
-                  label: 'Full Name',
-                  text: user.name,
-                  onChanged: (name) => user = user.copy(name: name),
-                ),
-                const SizedBox(height: 24),
-                TextFieldWidget(
-                  label: 'Email',
-                  text: user.email,
-                  onChanged: (email) => user = user.copy(email: email),
-                ),
-                const SizedBox(height: 24),
-                TextFieldWidget(
-                  label: 'Address',
-                  text: user.address,
-                  onChanged: (address) => user = user.copy(address: address),
-                ),
-                const SizedBox(height: 24),
-                TextFieldWidget(
-                  label: 'About',
-                  text: user.about,
-                  maxLines: 5,
-                  onChanged: (about) => user = user.copy(about: about),
-                ),
-                const SizedBox(height: 24),
-                ButtonWidget(
-                  text: 'Save',
-                  onClicked: () {
-                    UserPreferences.setUser(user);
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()));
-                  },
-                ),
-              ],
+                  const SizedBox(height: 24),
+                  TextFieldWidget(
+                    label: 'Full Name',
+                    text: user.name,
+                    onChanged: (name) => user = user.copy(name: name),
+                  ),
+                  const SizedBox(height: 24),
+                  TextFieldWidget(
+                    label: 'Email',
+                    text: user.email,
+                    onChanged: (email) => user = user.copy(email: email),
+                  ),
+                  const SizedBox(height: 24),
+                  TextFieldWidget(
+                    label: 'Address',
+                    text: user.address,
+                    maxLines: 3,
+                    onChanged: (address) => user = user.copy(address: address),
+                  ),
+                  const SizedBox(height: 24),
+                  TextFieldWidget(
+                    label: 'About',
+                    text: user.about,
+                    maxLines: 5,
+                    onChanged: (about) => user = user.copy(about: about),
+                  ),
+                  const SizedBox(height: 24),
+                  ButtonWidget(
+                    text: 'Save',
+                    onClicked: () {
+                      UserPreferences.setUser(user);
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage()));
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

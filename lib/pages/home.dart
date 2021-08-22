@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:hngi8_project0/pages/page1.dart';
+import 'package:hngi8_project0/pages/aboutme.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -41,34 +41,10 @@ class _HomeState extends State<Home> {
           ),
           splashIconSize: 300,
           duration: 3000,
-          nextScreen: EditProfilePage(),
+          nextScreen: Me(),
           splashTransition: SplashTransition.scaleTransition,
         ),
       ),
     );
   }
 }
-
-/*late AnimationController controller;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    controller = AnimationController(
-      duration: Duration(seconds: 3),
-      vsync: this,
-    );
-    controller.forward();
-    controller.addListener(() {
-      setState(() {});
-    });
-  */
-/*child: AnimatedSplashScreen(
-          splash: Image(
-            image: AssetImage('assets/download.jpg'),
-          ),
-          duration: 3000,
-          nextScreen: EditProfilePage(),
-          splashTransition: SplashTransition.scaleTransition,
-        ),*/

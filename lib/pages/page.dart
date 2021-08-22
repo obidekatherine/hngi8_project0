@@ -21,59 +21,65 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       appBar: buildAppBar(context),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          ProfileWidget(
-            imagePath: user.imagePath,
-            onClicked: () async {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => EditProfilePage()));
-              setState(() {});
-            },
-          ),
-          const SizedBox(height: 24),
-          buildName(user),
-          const SizedBox(height: 24),
-          buildAddress(user),
-          const SizedBox(height: 48),
-          buildAbout(user),
-          const SizedBox(height: 50),
-          Text(
-            'For More Info Visit',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.blue,
-              fontWeight: FontWeight.bold,
+      body: Scrollbar(
+        hoverThickness: 20,
+        showTrackOnHover: true,
+        isAlwaysShown: true,
+        thickness: 20,
+        child: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            ProfileWidget(
+              imagePath: user.imagePath,
+              onClicked: () async {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => EditProfilePage()));
+                setState(() {});
+              },
             ),
-          ),
-          const SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 80,
-                height: 100,
-                child: Image(
-                  image: AssetImage('assets/download.jpg'),
-                ),
+            const SizedBox(height: 24),
+            buildName(user),
+            const SizedBox(height: 40),
+            buildAddress(user),
+            const SizedBox(height: 48),
+            buildAbout(user),
+            const SizedBox(height: 80),
+            Text(
+              'For More Info Visit',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(width: 10),
-              TextButton(
-                onPressed: _launchURL,
-                child: Text(
-                  'https://internship.zuri.team',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 80,
+                  height: 60,
+                  child: Image(
+                    image: AssetImage('assets/download.jpg'),
                   ),
                 ),
-              ),
-            ],
-          )
-        ],
+                // SizedBox(width: 4),
+                TextButton(
+                  onPressed: _launchURL,
+                  child: Text(
+                    'https://internship.zuri.team',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -96,12 +102,23 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       );
 
-  Widget buildAddress(User user) => Text(
-        user.address,
-        textAlign: TextAlign.center,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+  Widget buildAddress(User user) => Container(
+        padding: EdgeInsets.symmetric(horizontal: 48),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Address',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              user.address,
+              style: TextStyle(fontSize: 16, height: 1.4),
+            ),
+          ],
+        ),
       );
-
   Widget buildAbout(User user) => Container(
         padding: EdgeInsets.symmetric(horizontal: 48),
         child: Column(
